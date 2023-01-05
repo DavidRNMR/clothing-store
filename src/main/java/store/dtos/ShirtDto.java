@@ -12,5 +12,6 @@ public class ShirtDto implements Serializable {
     private String size;
     private Float prize;
     private String colour;
+    private Integer stock;
     private StockStatus stockStatus;
 }

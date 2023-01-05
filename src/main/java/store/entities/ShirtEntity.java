@@ -20,6 +20,7 @@ public class ShirtEntity {
     private String size;
     private Float prize;
     private String colour;
+    private Integer stock;
     @Enumerated(EnumType.STRING)
     private StockStatus stockStatus;
     @ManyToOne
