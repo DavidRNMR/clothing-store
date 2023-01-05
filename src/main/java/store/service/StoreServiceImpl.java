@@ -143,6 +143,7 @@ public class StoreServiceImpl implements StoreService {
         shirtEntity.setSize(size);
         shirtEntity.setColour(colour);
         shirtEntity.setStock(stock);
+        shirtEntity.setPrize(prize);
 
         if (shirtEntity.getStock()>0){
             shirtEntity.setStockStatus(StockStatus.AVAILABLE);
@@ -150,7 +151,7 @@ public class StoreServiceImpl implements StoreService {
         else{
             shirtEntity.setStockStatus(StockStatus.SOLDOUT);
         }
-        shirtEntity.setPrize(prize);
+
 
         ShirtEntity saved = shirtRepository.save(shirtEntity);
 
@@ -159,11 +160,14 @@ public class StoreServiceImpl implements StoreService {
 
     @Override
     public List<PantDto> findAllPants() {
-        return null;
+
+        List<PantEntity> pantEntities = pantRepository.findAll();
+
+        return pantEntities.stream().map(pantEntity -> mapper.fromPant(pantEntity)).collect(Collectors.toList());
     }
 
     @Override
-    public PantDto savePant(Integer stock, String size, String colour, Float prize, Long orderId) throws OrderNotFoundException{
+    public PantDto savePant(PantDto pantDto,Integer stock, String size, String colour, Float prize, Long orderId) throws OrderNotFoundException{
 
         OrderEntity orderEntity = orderRepository.findById(orderId).orElseThrow(()->new OrderNotFoundException("Order Not Found"));
 
@@ -172,6 +176,7 @@ public class StoreServiceImpl implements StoreService {
         pantEntity.setSize(size);
         pantEntity.setStock(stock);
         pantEntity.setPrize(prize);
+        pantEntity.setColour(colour);
 
         if(pantEntity.getStock()>0){
             pantEntity.setStockStatus(StockStatus.AVAILABLE);

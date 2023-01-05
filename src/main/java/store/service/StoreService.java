@@ -20,11 +20,10 @@ public interface StoreService {
     List<OrderDto> findAllOrders();
     OrderDto findOneOrder(Long id) throws OrderNotFoundException;
     OrderDto saveOrder (OrderDto orderDto, Long userId) throws UserNotFoundException;
-
     void deleteOrder (Long id) throws OrderNotFoundException;
 
     List<ShirtDto> findAllShirts();
     ShirtDto saveShirt (ShirtDto shirtDto, Integer stock, String size, String colour, Float prize, Long orderId) throws OrderNotFoundException;
     List<PantDto> findAllPants();
-    PantDto savePant (Integer stock, String size, String colour, Float prize, Long orderId) throws OrderNotFoundException;
+    PantDto savePant (PantDto pantDto,Integer stock, String size, String colour, Float prize, Long orderId) throws OrderNotFoundException;
 }
