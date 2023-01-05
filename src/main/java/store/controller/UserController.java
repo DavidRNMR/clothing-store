@@ -18,10 +18,9 @@ public class UserController {
 
 
     @PostMapping("/addUser")
-    public ResponseEntity<UserDto> addUser(@RequestBody UserDto userDto){
+    public UserDto addUser(@RequestBody UserDto userDto){
 
-    return ResponseEntity.status(HttpStatus.CREATED).body(service.saveUser(userDto));
-
+        return service.saveUser(userDto);
     }
 
     @GetMapping("/findAllUsers")
